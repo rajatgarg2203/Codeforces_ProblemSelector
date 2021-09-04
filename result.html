@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+
+    <title>CodeForces Problems Selector</title>
+</head>
+
+<body>
+    <div class="ui stackable padded grid" style="height: 100vh">
+        <div class="seven wide column">
+
+            <div class="ui fluid action big input">
+                <input type="text" placeholder="Handle..." id="handleInp">
+                <button class="ui button" onclick="addHandle()">Add</button>
+                <input type="text" placeholder="rating" id="ratingInp">
+                <button class="ui button" onclick="Show()">Enter</button>
+            </div>
+
+            <div style="overflow-y: scroll; display: block; max-height: 85vh; margin-top: 2vh">
+                <table class="ui fluid unstackable striped table" id="handleTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 75%">Handle</th>
+                            <th>Rating</th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="nine wide black column">
+            <!-- <div class="one ui buttons"> -->
+                    <!-- <button class="ui big inverted button" id="Div. 1" >Div 1</button>
+                    <button class="ui big inverted button" id="Div. 2" >Div 2</button>
+                    <button class="ui big inverted button" id="Div. 3">Div 3</button> -->
+                    <!-- <button class="ui big inverted button green" onclick="Show()">Show!</button>
+            </div> -->
+            <div style="overflow-y: scroll; display: block; max-height: 85vh; margin-top: 2vh">
+                <table class="ui fluid striped table inverted" id="contestTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 100%"><b>Problems</b></th>
+                            <!-- <th><b>Id</b></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="functions.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+</body>
+
+</html>
