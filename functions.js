@@ -1,4 +1,4 @@
-alert("hey");
+
 var Contests = new Map()
 var Handles = new Set()
 // var ConType = new Set()
