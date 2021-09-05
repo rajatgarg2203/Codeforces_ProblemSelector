@@ -1,10 +1,9 @@
-
-var Contests = new Map()
+var AllProblems = new Map()
 var Handles = new Set()
 // var ConType = new Set()
-var ProblemRating = "1500";
+var ProblemRating = "800";
 
-function UpdateContests(){    
+function GetAllProblems(){    
     fetch('https://codeforces.com/api/problemset.problems')
     .then(response => response.json())
     .then(data => {
@@ -18,7 +17,7 @@ function UpdateContests(){
                     }
                 });
                 if(res)
-                    Contests.set(problemsData.contestId,problemsData.index);
+                AllProblems.set(problemsData.contestId,problemsData.index);
 
             }
                 
@@ -65,8 +64,8 @@ function removeHandle(btn) {
 
 function Show(){
     ProblemRating = document.getElementById("ratingInp").value;
-    UpdateContests();
-    var AttContests = new Set()
+    GetAllProblems();
+    var DoneProblems = new Set()
     var fetches = []
 
     for(let handle of Handles){
@@ -78,9 +77,9 @@ function Show(){
             data.result.forEach(problems => {
                 console.log(problems);
                 console.log(problems.verdict);
-                if (problems.verdict == "OK"){
+                if (problems.verdict == "OK" && problems.problem.rating == ProblemRating){
                     var ProblemName = `${problems.problem.contestId}_${problems.problem.index}`;
-                    AttContests.add(ProblemName);
+                    DoneProblems.add(ProblemName);
                 }
             })
         })
@@ -90,20 +89,20 @@ function Show(){
     Promise.all(fetches)
     .then(function(){
         $('#contestTable tr').not(function(){ return !!$(this).has('th').length; }).remove();
-        Contests.forEach((problem_id, contest_id) => {
+        AllProblems.forEach((problem_id, contest_id) => {
             flag = true
             // ConType.forEach((type) => {
             //     if(contest_name.indexOf(type) == -1) flag = false
             // })
             var ProblemIndex = `${contest_id}_${problem_id}`;
             
-            if(!AttContests.has(ProblemIndex)){
+            if(!DoneProblems.has(ProblemIndex)){
             
                 var contestTable = document.getElementById("contestTable")
                 var row = contestTable.insertRow(-1)
                 
                 row.insertCell(0).innerHTML = '<a href="https://codeforces.com/problemset/problem/' + contest_id + '/' + problem_id + '" target="_blank">' + ProblemIndex + '</a>'
-                // row.insertCell(1).innerHTML = contest_id + contest_name;
+                row.insertCell(1).innerHTML = ProblemRating;
             }
         })
     })
